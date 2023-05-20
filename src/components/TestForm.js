@@ -28,7 +28,8 @@ export default function TestForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (isValid()) {
+        if (isValid) {
+            console.log("minden yo")
             reset()
         } else {
             console.log("nincs ez így jól")

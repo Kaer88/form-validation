@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function useValidate(initialValues) {
 
     const [formInputs, setFormInputs] = useState(initialValues)
+    const [isValid, setIsValid] = useState(false)
 
     const handleChange = (e) => {
 
@@ -28,16 +29,16 @@ export default function useValidate(initialValues) {
         setFormInputs(output)
     }
 
-    const validateAllInputs = () => {
-        return Object.values(formInputs).every(input => input.isValid === true)
+    useEffect(() => {
+        setIsValid(Object.values(formInputs).every(input => input.isValid === true))
 
-    }
+    }, [formInputs])
 
     return {
         formInputs,
         setFormInputs,
         handleChange,
-        isValid: validateAllInputs,
+        isValid,
         reset
     }
 
