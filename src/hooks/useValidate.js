@@ -4,6 +4,7 @@ export default function useValidate(initialValues) {
 
     const [formInputs, setFormInputs] = useState(initialValues)
     const [isValid, setIsValid] = useState(false)
+    const [formData, setFormData] = useState({})
 
     const handleChange = (e) => {
 
@@ -30,8 +31,16 @@ export default function useValidate(initialValues) {
     }
 
     useEffect(() => {
-        setIsValid(Object.values(formInputs).every(input => input.isValid === true))
+        const newIsValid = Object.values(formInputs).every(input => input.isValid === true)
+        setIsValid(newIsValid)
+        if (newIsValid) {
+            let result = {};
+            Object.keys(formInputs).forEach(key => {
+                result[key] = formInputs[key].value
+            })
 
+            setFormData(result)
+        }
     }, [formInputs])
 
     return {
@@ -39,7 +48,8 @@ export default function useValidate(initialValues) {
         setFormInputs,
         handleChange,
         isValid,
-        reset
+        reset,
+        formData
     }
 
 }

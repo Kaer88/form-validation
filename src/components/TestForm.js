@@ -24,12 +24,12 @@ const initialValues = {
 
 export default function TestForm() {
 
-    const { formInputs, setFormInputs, handleChange, isValid, reset } = useValidate(initialValues)
+    const { formInputs, setFormInputs, handleChange, isValid, reset, formData } = useValidate(initialValues)
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isValid) {
-            console.log("minden yo")
+            console.log(formData)
             reset()
         } else {
             console.log("nincs ez így jól")
