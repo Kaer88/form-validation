@@ -16,6 +16,18 @@ export default function useValidate(initialValues) {
 
     }
 
+    const reset = () => {
+        let output = {};
+        Object.keys(formInputs).forEach(formItem => {
+            output[formItem] = {
+                value: "",
+                isValid: false
+            }
+
+        })
+        setFormInputs(output)
+    }
+
     const validateAllInputs = () => {
         return Object.values(formInputs).every(input => input.isValid === true)
 
@@ -25,7 +37,8 @@ export default function useValidate(initialValues) {
         formInputs,
         setFormInputs,
         handleChange,
-        isValid: validateAllInputs
+        isValid: validateAllInputs,
+        reset
     }
 
 }

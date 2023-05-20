@@ -2,7 +2,6 @@ import { useState } from "react";
 import TextInput from "./TextInput";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import useValidate from "../hooks/useValidate";
 
 const initialValues = {
     email: {
@@ -20,15 +19,30 @@ const initialValues = {
 
 }
 
+const validateAllInputs = (formData) => {
+    return Object.values(formData).every(input => input.isValid === true)
 
+}
 
-export default function TestForm2() {
+export default function TestForm() {
 
-    const { formInputs, setFormInputs, handleChange, isValid } = useValidate(initialValues)
+    const [formInputs, setFormInputs] = useState(initialValues)
+
+    const handleChange = (e) => {
+
+        setFormInputs({
+            ...formInputs,
+            [e.target.name]: {
+                ...formInputs[e.target.name],
+                value: e.target.value
+            }
+        })
+
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (isValid()) {
+        if (validateAllInputs(formInputs)) {
             console.log("minden jó")
         } else {
             console.log("nincs ez így jól")

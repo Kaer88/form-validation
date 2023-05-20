@@ -1,14 +1,13 @@
 
 import './App.css';
-import TestForm from './components/TestForm';
-import TestForm2 from './components/TestForm_v2';
+
+import TestForm from './components/TestForm_legacy';
 
 function App() {
   return (
     <>
+
       <TestForm />
-      <hr></hr>
-      <TestForm2 />
     </>
   );
 }

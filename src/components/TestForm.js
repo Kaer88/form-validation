@@ -1,7 +1,8 @@
-import { useState } from "react";
+
 import TextInput from "./TextInput";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import useValidate from "../hooks/useValidate";
 
 const initialValues = {
     email: {
@@ -19,31 +20,16 @@ const initialValues = {
 
 }
 
-const validateAllInputs = (formData) => {
-    return Object.values(formData).every(input => input.isValid === true)
 
-}
 
 export default function TestForm() {
 
-    const [formInputs, setFormInputs] = useState(initialValues)
-
-    const handleChange = (e) => {
-
-        setFormInputs({
-            ...formInputs,
-            [e.target.name]: {
-                ...formInputs[e.target.name],
-                value: e.target.value
-            }
-        })
-
-    }
-
+    const { formInputs, setFormInputs, handleChange, isValid, reset } = useValidate(initialValues)
+    console.log(formInputs)
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (validateAllInputs(formInputs)) {
-            console.log("minden jó")
+        if (isValid()) {
+            reset()
         } else {
             console.log("nincs ez így jól")
         }
@@ -57,7 +43,7 @@ export default function TestForm() {
                 type="text"
                 name="email"
                 onChange={handleChange}
-                value={formInputs.email.value}
+                values={formInputs}
                 label="E-mail"
                 setFormInputs={setFormInputs}
 
@@ -66,7 +52,7 @@ export default function TestForm() {
                 type="password"
                 name="password"
                 onChange={handleChange}
-                value={formInputs.password.value}
+                values={formInputs}
                 label="Jelszó"
                 setFormInputs={setFormInputs}
 
@@ -75,7 +61,7 @@ export default function TestForm() {
                 type="number"
                 name="number"
                 onChange={handleChange}
-                value={formInputs.number.value}
+                values={formInputs}
                 setFormInputs={setFormInputs}
                 label="Szám"
 

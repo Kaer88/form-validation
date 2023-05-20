@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import validate from "../util/validator";
 
-export default function TextInput({ label, type, name, value, onChange, setFormInputs }) {
+export default function TextInput({ label, type, name, values, onChange, setFormInputs }) {
 
     const [isValidInput, setIsValidInput] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -11,7 +11,7 @@ export default function TextInput({ label, type, name, value, onChange, setFormI
 
     const handleValidate = () => {
         setIsTouched(true);
-        const invalid = validate[name].find(validator => !validator.isValid(value))
+        const invalid = validate[name].find(validator => !validator.isValid(values[name].value))
 
         if (invalid) {
             setIsValidInput(false)
@@ -39,13 +39,22 @@ export default function TextInput({ label, type, name, value, onChange, setFormI
         }))
     }, [isValidInput])
 
+    useEffect(() => {
+        if(values[name].value ==="") {
+            setIsValidInput(false);
+            setIsTouched(false)
+        }
+    }, [values[name].isValid])
+
+
+
     return (
         <Form.Group>
             <Form.Label>{label}</Form.Label>
             <Form.Control
                 type={type}
                 name={name}
-                value={value}
+                value={values[name].value}
                 onChange={realTimeValidate}
                 isValid={isValidInput}
                 isInvalid={errorMessage ? true : false}
