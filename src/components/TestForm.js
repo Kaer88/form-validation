@@ -25,7 +25,7 @@ const initialValues = {
 export default function TestForm() {
 
     const { formInputs, setFormInputs, handleChange, isValid, reset } = useValidate(initialValues)
-    console.log("hahó!", formInputs)
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isValid()) {

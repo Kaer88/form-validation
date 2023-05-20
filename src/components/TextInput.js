@@ -8,8 +8,6 @@ export default function TextInput({ label, type, name, values, onChange, setForm
     const [errorMessage, setErrorMessage] = useState("");
     const [isTouched, setIsTouched] = useState(false)
 
-    console.log(values)
-
     const handleValidate = () => {
         setIsTouched(true);
         const invalid = validate[name].find(validator => !validator.isValid(values[name].value))
