@@ -8,6 +8,7 @@ export default function TextInput({ label, type, name, values, onChange, setForm
     const [errorMessage, setErrorMessage] = useState("");
     const [isTouched, setIsTouched] = useState(false)
 
+    console.log(values)
 
     const handleValidate = () => {
         setIsTouched(true);
@@ -40,7 +41,7 @@ export default function TextInput({ label, type, name, values, onChange, setForm
     }, [isValidInput])
 
     useEffect(() => {
-        if(values[name].value ==="") {
+        if(values[name].value === "") {
             setIsValidInput(false);
             setIsTouched(false)
         }
@@ -54,7 +55,7 @@ export default function TextInput({ label, type, name, values, onChange, setForm
             <Form.Control
                 type={type}
                 name={name}
-                value={values[name].value}
+                value={values? values[name].value : undefined}
                 onChange={realTimeValidate}
                 isValid={isValidInput}
                 isInvalid={errorMessage ? true : false}
