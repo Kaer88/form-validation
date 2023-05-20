@@ -19,6 +19,11 @@ const initialValues = {
 
 }
 
+const validateAllInputs = (formData) => {
+    return Object.values(formData).every(input => input.isValid === true)
+
+}
+
 export default function TestForm() {
 
     const [formInputs, setFormInputs] = useState(initialValues)
@@ -29,16 +34,19 @@ export default function TestForm() {
             ...formInputs,
             [e.target.name]: {
                 ...formInputs[e.target.name],
-                value : e.target.value
+                value: e.target.value
             }
         })
 
     }
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!isValidForm) return;
+        if (validateAllInputs(formInputs)) {
+            console.log("minden jó")
+        } else {
+            console.log("nincs ez így jól")
+        }
 
     }
 
@@ -49,26 +57,26 @@ export default function TestForm() {
                 type="text"
                 name="email"
                 onChange={handleChange}
-                value={formValues.email}
+                value={formInputs.email.value}
                 label="E-mail"
-                setIsValidForm={setIsValidForm}
+                setFormInputs={setFormInputs}
 
             />
             <TextInput
                 type="password"
                 name="password"
                 onChange={handleChange}
-                value={formValues.password}
+                value={formInputs.password.value}
                 label="Jelszó"
-                setIsValidForm={setIsValidForm}
+                setFormInputs={setFormInputs}
 
             />
             <TextInput
                 type="number"
                 name="number"
                 onChange={handleChange}
-                value={formValues.number}
-                setIsValidForm={setIsValidForm}
+                value={formInputs.number.value}
+                setFormInputs={setFormInputs}
                 label="Szám"
 
             />

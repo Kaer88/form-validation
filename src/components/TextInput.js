@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import validate from "../util/validator";
 
-export default function TextInput({ label, type, name, value, onChange }) {
+export default function TextInput({ label, type, name, value, onChange, setFormInputs }) {
 
     const [isValidInput, setIsValidInput] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const [isTouched, setIsTouhed] = useState(false)
+    const [isTouched, setIsTouched] = useState(false)
 
 
     const handleValidate = () => {
-        setIsTouhed(true);
+        setIsTouched(true);
         const invalid = validate[name].find(validator => !validator.isValid(value))
 
         if (invalid) {
@@ -25,12 +25,19 @@ export default function TextInput({ label, type, name, value, onChange }) {
 
     const realTimeValidate = (e) => {
         if (isTouched) handleValidate();
-        setIsValidForm(prev => ({
-            ...prev,
-            [name]: isValidInput
-        }))
         onChange(e);
     }
+
+    useEffect(() => {
+        setFormInputs(prev => ({
+            ...prev,
+            [name]: {
+                ...prev[name],
+                isValid: isValidInput
+            }
+
+        }))
+    }, [isValidInput])
 
     return (
         <Form.Group>
