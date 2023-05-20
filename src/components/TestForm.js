@@ -3,7 +3,7 @@ import TextInput from "./TextInput";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useValidate from "../hooks/useValidate";
-
+import validator from "validator";
 const initialValues = {
     email: {
         value: "",
@@ -24,7 +24,7 @@ const initialValues = {
 
 export default function TestForm() {
 
-    const { formInputs, setFormInputs, handleChange, isValid, reset, formData } = useValidate(initialValues)
+    const { formInputs, setFormInputs, handleChange, isValid, reset, formData } = useValidate(initialValues, validator)
 
     const handleSubmit = (e) => {
         e.preventDefault();

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-export default function useValidate(initialValues) {
+export default function useValidate(initialValue, validator) {
 
-    const [formInputs, setFormInputs] = useState(initialValues)
+    const [formInputs, setFormInputs] = useState(initialValue)
     const [isValid, setIsValid] = useState(false)
     const [formData, setFormData] = useState({})
 
