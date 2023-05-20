@@ -18,6 +18,12 @@ export default function useValidate(initialValues) {
 
     }
 
+    const checkValidate = () => {
+        return Object.keys(validator).every(fieldName => {
+            return validator[fieldName].every(item => item.isValid(formInputs[fieldName].value, formInputs.password?.value))
+        })
+    }
+
     const reset = () => {
         let output = {};
         Object.keys(formInputs).forEach(formItem => {
@@ -49,7 +55,8 @@ export default function useValidate(initialValues) {
         handleChange,
         isValid,
         reset,
-        formData
+        formData,
+        checkValidate
     }
 
 }

@@ -31,6 +31,7 @@ const validate = {
             message: "Ez nem szám, nem tudom hogy",
         },
     ]
+
 }
 
 
