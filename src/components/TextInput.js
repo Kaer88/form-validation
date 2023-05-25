@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
-import validate from "../util/validator";
 
-export default function TextInput({ label, type, name, values, onChange, setFormInputs }) {
+
+export default function TextInput({ label, type, name, values, onChange, setFormInputs, validate }) {
 
     const [isValidInput, setIsValidInput] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");

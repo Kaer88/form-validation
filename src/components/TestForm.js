@@ -3,7 +3,8 @@ import TextInput from "./TextInput";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useValidate from "../hooks/useValidate";
-import validator from "validator";
+import validator from "../util/validator";
+import validate from "../util/validator";
 const initialValues = {
     email: {
         value: "",
@@ -24,7 +25,7 @@ const initialValues = {
 
 export default function TestForm() {
 
-    const { formInputs, setFormInputs, handleChange, isValid, reset, formData } = useValidate(initialValues, validator)
+    const { formInputs, setFormInputs, handleChange, isValid, reset, formData } = useValidate(initialValues, validate)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -47,6 +48,7 @@ export default function TestForm() {
                 values={formInputs}
                 label="E-mail"
                 setFormInputs={setFormInputs}
+                validate={validate}
 
             />
             <TextInput
@@ -56,6 +58,7 @@ export default function TestForm() {
                 values={formInputs}
                 label="Jelszó"
                 setFormInputs={setFormInputs}
+                validate={validate}
 
             />
             <TextInput
@@ -65,6 +68,7 @@ export default function TestForm() {
                 values={formInputs}
                 setFormInputs={setFormInputs}
                 label="Szám"
+                validate={validate}
 
             />
             <Button className="mt-3" type="primary">Küldés</Button>
